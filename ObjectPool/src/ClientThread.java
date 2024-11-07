@@ -8,10 +8,14 @@ import java.util.concurrent.TimeUnit;
 public class ClientThread implements Runnable {
     private WaiterPool waiterPool;
     private String clientName;
+    private String drinkName;
+    private String moneyName;
 
-    public ClientThread(WaiterPool waiterPool, String clientName) {
+    public ClientThread(WaiterPool waiterPool, String clientName, String drinkName, String moneyName) {
         this.waiterPool = waiterPool;
         this.clientName = clientName;
+        this.drinkName = drinkName;
+        this.moneyName = moneyName;
     }
 
 
@@ -22,7 +26,7 @@ public class ClientThread implements Runnable {
 
     private void orderaDrink() {
         try {
-            System.out.println("Khách hàng " + clientName + " vừa mới gọi món!");
+            System.out.println("Khách hàng " + clientName + " vừa mới gọi món " + drinkName + " với giá tiền là " + moneyName + "!");
 
             WaiterInServer waiter = waiterPool.getWaiter();
 
