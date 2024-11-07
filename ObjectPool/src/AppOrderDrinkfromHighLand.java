@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AppOrderDrinkfromHighLand {
-    public static final int NUM_OF_CLIENT = 8;                                                    // số lượng client gọi món
+    public static final int NUM_OF_CLIENT = 8;                                                    // số lượng client tối đa được vào cửa tiệm để gọi món
     public static void main ( String[] args) {
         WaiterPool waiterPool = new WaiterPool();
 
@@ -55,8 +55,8 @@ public class AppOrderDrinkfromHighLand {
 
 
 
-
-
+//Idea: tiếp theo là ghi file, hãy xuat hoa dơn để kèm theo những thong tin thưa, ưng dung regex
+//IDea: ứng dung regex đẻ xoá bỏ những thông tin thừa khi đọc file txt, chi lay nhung thong tin can thiet
 
 
 /*
