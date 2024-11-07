@@ -1,0 +1,8 @@
+Nguyễn Văn A,Phin Sữa Đá,29.000
+Nguyễn Trung,Phin Sữa Nóng,29.000
+Nguyễn Trung Kiên,Capuchino,99.000
+Ngọc C,Cookie & Cream,69.000
+Minh D,Capuchino,99.000
+Mai E,Latte,23.000
+Lan F,Tắc Đá Viên,43.0000
+Hoàng G,Caramel phin Freeze,24.0000
