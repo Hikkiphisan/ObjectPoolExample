@@ -1,9 +1,9 @@
-import org.omg.CORBA.Current;
+package model;
 
-import java.util.Currency;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
-
+import Object.WaiterPool;
+import Object.WaiterNotFoundException;
 
 public class ClientThread implements Runnable {
     private WaiterPool waiterPool;

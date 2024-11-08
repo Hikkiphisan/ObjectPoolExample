@@ -1,3 +1,7 @@
+package Object;
+
+import model.WaiterInServer;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

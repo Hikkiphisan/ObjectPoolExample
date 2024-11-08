@@ -1,3 +1,5 @@
+package model;
+
 public class WaiterInServer {
     private String nameWaiter;
 
@@ -16,7 +18,7 @@ public class WaiterInServer {
 
     @Override
     public String toString() {
-        return "WaiterInServer{" +
+        return "Model.WaiterInServer{" +
                 "nameWaiter='" + nameWaiter + '\'' +
                 '}';
     }
