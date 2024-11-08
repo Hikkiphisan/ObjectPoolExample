@@ -1,9 +1,11 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AppOrderDrinkfromHighLand {
-    public static final int NUM_OF_CLIENT = 8;                                                 // số lượng client tối đa được vào cửa tiệm để gọi món
+    public static final int NUM_OF_CLIENT = 5;                                                 // số lượng client tối đa được vào cửa tiệm để gọi món
     public static void main ( String[] args) {
         WaiterPool waiterPool = new WaiterPool();
 
@@ -53,23 +55,27 @@ public class AppOrderDrinkfromHighLand {
                 e.printStackTrace();
             }
 
-            // Tạo và chạy thread cho từng khách hàng
 
+            // Tạo và chạy thread cho từng khách hàng
             Runnable client = new ClientThread(waiterPool, clientName, drinkName, money);
             Thread thread = new Thread(client);
             thread.start();
         }
     }
+    public static String cleanData(String input) {
+        // Regex để tìm các dòng có cấu trúc: "Tên khách hàng, Loại đồ uống, Giá tiền"
+        Pattern pattern = Pattern.compile("([\\p{L} ]+),\\s*([\\p{L} &]+),\\s*(\\d+\\.\\d+)");
+        Matcher matcher = pattern.matcher(input);
 
-
+        StringBuilder cleanedData = new StringBuilder();
+        while (matcher.find()) {
+            // Ghép nối tên khách hàng, đồ uống, giá tiền vào kết quả
+            cleanedData.append(matcher.group(1)).append(", ")
+                    .append(matcher.group(2)).append(", ")
+                    .append(matcher.group(3)).append("\n");
+        }
+        return cleanedData.toString();
     }
 
-
-
-
-
-
-
-//Idea: tiếp theo là ghi file, hãy xuat hoa dơn để kèm theo những thong tin thưa, ưng dung regex
-//IDea: ứng dung regex đẻ xoá bỏ những thông tin thừa khi đọc file txt, chi lay nhung thong tin can thiet
+    }
 
