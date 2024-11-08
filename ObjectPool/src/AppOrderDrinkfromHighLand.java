@@ -1,11 +1,9 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AppOrderDrinkfromHighLand {
-    public static final int NUM_OF_CLIENT = 8;                                                    // số lượng client tối đa được vào cửa tiệm để gọi món
+    public static final int NUM_OF_CLIENT = 8;                                                 // số lượng client tối đa được vào cửa tiệm để gọi món
     public static void main ( String[] args) {
         WaiterPool waiterPool = new WaiterPool();
 
@@ -14,6 +12,9 @@ public class AppOrderDrinkfromHighLand {
         List<String> drinkNames = new ArrayList<>();
         List<String> moneyNames = new ArrayList<>();
 
+
+
+        //Để đọc đơn gọi món.
         try (BufferedReader br = new BufferedReader(new FileReader("D:\\CodeGym\\Module 2\\ObjectPoolExample\\ObjectPool\\src\\clients.txt"))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -30,25 +31,39 @@ public class AppOrderDrinkfromHighLand {
         }
 
 
-       // Đảm bảo số lượng khách hàng đúng với NUM_OF_CLIENT
-        if (clientNames.size() != NUM_OF_CLIENT || drinkNames.size() != NUM_OF_CLIENT || moneyNames.size() != NUM_OF_CLIENT) {
-            System.out.println("Số lượng khách hàng, đồ uống hoặc giá tiền không khớp với NUM_OF_CLIENT.");
-            return;
-        }
 
 
-
-        // Khởi động nhiều luồng (threads), mỗi luồng đại diện cho một "client"
-        for (int i = 0; i < NUM_OF_CLIENT ; i++) {                                                // khởi động nhiều luồng (threads), mỗi luồng đại diện cho một "client"
+        // Tạo hóa đơn riêng lẻ cho từng khách hàng
+        for (int i = 0; i < NUM_OF_CLIENT; i++) {
             String clientName = clientNames.get(i);
             String drinkName = drinkNames.get(i);
-            String moneyName = moneyNames.get(i);
-            Runnable client = new ClientThread(waiterPool, clientName, drinkName, moneyName);
+            String money = moneyNames.get(i);
+
+            // Tên file hóa đơn cho từng khách hàng
+            String fileName = String.format("D:\\CodeGym\\Module 2\\ObjectPoolExample\\ObjectPool\\src\\Hoá đơn của vị khách %s.txt", clientName);
+
+            // Ghi thông tin vào file hóa đơn
+            try (PrintWriter writer = new PrintWriter(new FileWriter(fileName))) {
+                writer.printf("%n%-30s%-20s%n", "========== HÓA ĐƠN KHÁCH HÀNG GỌI ĐỒ HIGHLAND NGÀY 11/8/2024 ==========", "");
+                writer.printf("| %-30s | %-30s |%n", "Tên khách hàng", clientName);
+                writer.printf("| %-30s | %-30s |%n", "Đồ uống", drinkName);
+                writer.printf("| %-30s | %-30s |%n", "Giá tiền", money);
+                writer.printf("%-30s%-20s%n", "=======================================================", "");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            // Tạo và chạy thread cho từng khách hàng
+
+            Runnable client = new ClientThread(waiterPool, clientName, drinkName, money);
             Thread thread = new Thread(client);
             thread.start();
         }
     }
-}
+
+
+    }
+
 
 
 
@@ -57,18 +72,4 @@ public class AppOrderDrinkfromHighLand {
 
 //Idea: tiếp theo là ghi file, hãy xuat hoa dơn để kèm theo những thong tin thưa, ưng dung regex
 //IDea: ứng dung regex đẻ xoá bỏ những thông tin thừa khi đọc file txt, chi lay nhung thong tin can thiet
-
-
-/*
-        String[] clientNames = {
-                "Nguyễn Văn A", "Nguyễn Trung", "Văn B", "Ngọc C", "Minh D",
-                "Mai E", "Lan F", "Hoàng G"
-        };
-        String[] drinkNames = {
-               "Phin Sữa Đá", "Phin Sữa Nóng" , "Capuchino", "Cookie & Cream", "Capuchino", "Latte", "Tắc Đá Viên" , "Caramel phin Freeze"
-        };
-
-        String[] moneyNames = {
-              "29.000" , "29.000", "99.000" , "69.000" ,"99.000" ,"23.000" ,"43.0000" , "24.0000"};
-*/
 
