@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class WaiterPool {
     private static final long EXPIRED_TIME_IN_MILESECOND = 1200;
-    private static final long NUMBER_OF_WAITER = 4;
+    private static final long NUMBER_OF_WAITER = 7;
 
     private final List<WaiterInServer> available = Collections.synchronizedList(new ArrayList<>());
     private final List<WaiterInServer> inUse = Collections.synchronizedList(new ArrayList<>());
@@ -38,8 +38,8 @@ public class WaiterPool {
 
     private WaiterInServer createWaiter() {
         String[] nameWaiter = {
-                "Nguyễn A", "Phí B", "Trung C", "Mai D", "Lan E",
-                "Hoàng F", "Minh G", "Linh H"
+                "Trần Minh Trí", "Phí Hữu Lộc", "Nguyễn Đức Thắng", "Lê Tuấn Dũng", "Đào Văn Huy Hưng",
+                "Hoàng Minh Nhật", "Thành"
         };
         waiting(200);
 
@@ -48,7 +48,7 @@ public class WaiterPool {
         String waiterName = nameWaiter[index];  // Lấy tên của nhân viên theo chỉ số
 
 
-        WaiterInServer waiter = new WaiterInServer("Nhân viên " + waiterName); //TRuyen nhan vien boi ban cua HIgland vao
+        WaiterInServer waiter = new WaiterInServer("Nhân viên phục vụ " + waiterName); //TRuyen nhan vien boi ban cua HIgland vao
         System.out.println(waiter.getNameWaiter() + " đã được triệu tập!!");
         return waiter;
     }
