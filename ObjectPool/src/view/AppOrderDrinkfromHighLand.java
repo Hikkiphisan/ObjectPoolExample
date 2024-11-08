@@ -9,6 +9,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import Object.WaiterPool;
 import Object.ValidateData;
+import Object.CleanDatafromFileTxt;
 
 public class AppOrderDrinkfromHighLand {
     public static final int NUM_OF_CLIENT = 5;                                                 // số lượng client tối đa được vào cửa tiệm để gọi món
@@ -27,7 +28,8 @@ public class AppOrderDrinkfromHighLand {
             String line;
             while ((line = br.readLine()) != null) {
                 // Sử dụng regex phương thức cleanData để delete ký tự thừa
-                String cleanLine = cleanData(line);
+                CleanDatafromFileTxt cleanDatafromFileTxt = new CleanDatafromFileTxt();
+                String cleanLine = cleanDatafromFileTxt.cleanData(line);
 
                 if (!cleanLine.isEmpty()) {
                     ValidateData validate = new ValidateData();
@@ -73,31 +75,10 @@ public class AppOrderDrinkfromHighLand {
             Thread thread = new Thread(client);
             thread.start();
         }
+
+
+
     }
-
-
-
-
-
-    public static String cleanData(String input) {
-        // Regex để tìm các dòng có cấu trúc: "Tên khách hàng, Loại đồ uống, Giá tiền"
-        Pattern pattern = Pattern.compile("([\\p{L} ]+),\\s*([\\p{L} &]+),\\s*(\\d+\\.\\d+)");
-        Matcher matcher = pattern.matcher(input);
-
-        StringBuilder cleanedData = new StringBuilder();
-        while (matcher.find()) {
-            // Ghép nối tên khách hàng, đồ uống, giá tiền vào kết quả
-            cleanedData.append(matcher.group(1)).append(", ")
-                    .append(matcher.group(2)).append(", ")
-                    .append(matcher.group(3)).append("\n");
-        }
-        return cleanedData.toString();
-    }
-
-
-
-
-
 
 
 
