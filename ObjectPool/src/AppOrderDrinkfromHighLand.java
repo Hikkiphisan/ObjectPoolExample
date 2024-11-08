@@ -20,12 +20,17 @@ public class AppOrderDrinkfromHighLand {
         try (BufferedReader br = new BufferedReader(new FileReader("D:\\CodeGym\\Module 2\\ObjectPoolExample\\ObjectPool\\src\\clients.txt"))) {
             String line;
             while ((line = br.readLine()) != null) {
-                // Tách thông tin từ mỗi dòng
-                String[] parts = line.split(",");
-                if (parts.length == 3) {
-                    clientNames.add(parts[0].trim());
-                    drinkNames.add(parts[1].trim());
-                    moneyNames.add(parts[2].trim());
+                // Sử dụng regex phương thức cleanData để delete ký tự thừa
+                String cleanLine = cleanData(line);
+
+                if (!cleanLine.isEmpty()) {
+                    // Tách thông tin từ mỗi dòng
+                    String[] parts = line.split(",");
+                    if (parts.length == 3) {
+                        clientNames.add(parts[0].trim());
+                        drinkNames.add(parts[1].trim());
+                        moneyNames.add(parts[2].trim());
+                    }
                 }
             }
         } catch (IOException e) {
