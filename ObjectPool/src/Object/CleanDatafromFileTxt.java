@@ -3,7 +3,7 @@ package Object;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import view.AppOrderDrinkfromHighLand;
+
 public class CleanDatafromFileTxt {
     public CleanDatafromFileTxt() {};
 

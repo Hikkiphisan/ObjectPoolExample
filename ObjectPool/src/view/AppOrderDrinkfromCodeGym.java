@@ -5,13 +5,12 @@ import model.ClientThread;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import Object.WaiterPool;
 import Object.ValidateData;
 import Object.CleanDatafromFileTxt;
+import Object.ReadOrderRequestsDataFromFileTxt;
 
-public class AppOrderDrinkfromHighLand {
+public class AppOrderDrinkfromCodeGym {
     public static final int NUM_OF_CLIENT = 5;                                                 // số lượng client tối đa được vào cửa tiệm để gọi món
     public static void main ( String[] args) {
         WaiterPool waiterPool = new WaiterPool();
@@ -22,31 +21,8 @@ public class AppOrderDrinkfromHighLand {
         List<String> moneyNames = new ArrayList<>();
 
 
-
         //Để đọc đơn gọi món.
-        try (BufferedReader br = new BufferedReader(new FileReader("D:\\CodeGym\\Module 2\\ObjectPoolExample\\ObjectPool\\src\\clients.txt"))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                // Sử dụng regex phương thức cleanData để delete ký tự thừa
-                CleanDatafromFileTxt cleanDatafromFileTxt = new CleanDatafromFileTxt();
-                String cleanLine = cleanDatafromFileTxt.cleanData(line);
-
-                if (!cleanLine.isEmpty()) {
-                    ValidateData validate = new ValidateData();
-                    // Tách thông tin từ mỗi dòng
-                    String[] parts = line.split(",");
-                    if (parts.length == 3 || validate.validateData(parts[0], parts[1], parts[2])              ) {  // Điều kiện validate này có vấn đề gây lỗi
-                        clientNames.add(parts[0].trim());
-                        drinkNames.add(parts[1].trim());
-                        moneyNames.add(parts[2].trim());
-                    }
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
+        ReadOrderRequestsDataFromFileTxt.readOrderRequestsDataFromFileTxt(clientNames,drinkNames,moneyNames);
 
 
         // Tạo hóa đơn riêng lẻ cho từng khách hàng
